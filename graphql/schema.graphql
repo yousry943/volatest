@@ -1,0 +1,121 @@
+"A date string with format `Y-m-d`, e.g. `2011-05-23`."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime
+  @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+type Query {
+  users: [User!]! @paginate(defaultCount: 10)
+  user(id: ID @eq): User @find
+
+  user_bank_account(id: ID @eq): user_bank_account @find
+  user_bank_accounts: [user_bank_account] @all # name of  relation comments in  post model #
+
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  posts: [Post] @hasMany
+
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+
+
+type user_bank_account {
+   id: ID!
+   user_id: String!
+   get_user: get_user @belongsTo
+   get_bank: get_bank @belongsTo
+   get_currency: get_currency @belongsTo
+   get_type_account: get_type_account @belongsTo
+   get_deposit:[get_deposit] @hasMany
+   get_withdrow_bank:[get_withdrow_bank] @hasMany
+   transactions_request:[transactions_request] @hasMany
+
+  total_deposit: String!
+  account_name:  String!
+  status: String!
+
+}
+
+type get_user {
+  id: ID!
+  name: String!
+}
+
+type get_bank {
+  id: ID!
+  name: String!
+}
+
+type get_currency {
+  id: ID!
+  name: String!
+}
+
+type get_type_account {
+  id: ID!
+  name: String!
+}
+
+type get_deposit {
+  id: ID!
+  amount: String!
+  date: String!
+
+}
+
+
+type get_withdrow_bank {
+  id: ID!
+  amount: String!
+  date: String!
+
+}
+
+
+
+type transactions_request {
+  id: ID!
+  get_to_user_bank_account_id: transactions_request @belongsTo
+  account_name: String!
+  amount: String!
+  date: String!
+
+}
+
+type get_to_user_bank_account_id {
+  id: ID!
+  account_name: String!
+
+
+}
+
+
+
+
+
+
+
+type Mutation {
+  createUser(
+    name: String! @rules(apply: ["required", "min:4"])
+    email: String! @rules(apply: ["email", "unique:users"])
+    password: String! @rules(apply: ["min:4"]) @bcrypt
+  ): User! @create
+
+  updateTag(
+  id:ID @rules(apply:["required"])
+  name: String @rules(apply:["required","unique:tags,name"])
+  ):Tag @update
+
+  deleteTag(
+  id:ID! @rules(apply:["required"])
+  ):Tag @delete
+
+}
