@@ -65,18 +65,48 @@ type get_type_account {
 
 type get_deposit {
   id: ID!
+
   amount: String!
   date: String!
 
 }
+
+
+type deposit_bank {
+  id: ID!
+  user_id: String!
+  id_user_bank_account: String!
+  amount: String!
+  date: String!
+
+}
+
+
 
 
 type get_withdrow_bank {
   id: ID!
+  user_id: String!
+  id_user_bank_account: String!
   amount: String!
   date: String!
 
 }
+
+
+
+
+type withdrow_bank {
+  id: ID!
+  user_id: String!
+  id_user_bank_account: String!
+  amount: String!
+  date: String!
+
+}
+
+
+
 
 
 
@@ -88,6 +118,8 @@ type transactions_request {
   date: String!
 
 }
+
+
 
 type get_to_user_bank_account_id {
   id: ID!
@@ -109,13 +141,37 @@ type Mutation {
     password: String! @rules(apply: ["min:4"]) @bcrypt
   ): User! @create
 
-  updateTag(
-  id:ID @rules(apply:["required"])
-  name: String @rules(apply:["required","unique:tags,name"])
-  ):Tag @update
+  withdrawMoney(
+  id:ID
+  user_id: String
+  id_user_bank_account: String
+  amount: String
+  date: String
+  ): withdrow_bank @create
 
-  deleteTag(
-  id:ID! @rules(apply:["required"])
-  ):Tag @delete
+
+  depositMoney(
+  id:ID
+  user_id: String
+  id_user_bank_account: String
+  amount: String
+  date: String
+  ): deposit_bank @create
+
+
+
+
+  trasnferMoney(
+  id:ID
+  user_id: String
+  from_user_bank_account_id: String
+  to_user_bank_account_id: String
+  amount: String
+  date: String 
+  ):transactions_request @create
+
+
+
+
 
 }

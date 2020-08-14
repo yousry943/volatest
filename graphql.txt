@@ -1,0 +1,58 @@
+# Write your query or mutation herequeary
+query{
+
+  user_bank_accounts
+  {
+    user_id
+    get_user{
+      id
+      name
+      }
+    get_bank{
+      name
+    }
+    get_currency{
+      name
+    }
+    get_type_account{
+      name
+    }
+    get_deposit{
+      amount
+      date
+    }
+    get_withdrow_bank{
+      amount
+      date
+    }
+    transactions_request{
+      get_to_user_bank_account_id{
+      id
+        account_name
+      
+    }
+      amount
+      date
+    }
+    
+total_deposit
+    account_name
+    status
+    
+  }
+  
+}
+
+
+# mutation{
+# depositMoney(user_id:"1",id_user_bank_account:"1",amount:"10",date:"10-10-2010"){
+#   amount
+# }
+  # withdrawMoney(user_id:"1",id_user_bank_account:"2",amount:"10",date:"10-11-201"){
+  #   amount
+  # }
+  
+  # trasnferMoney(user_id:"1",from_user_bank_account_id:"1",to_user_bank_account_id:"2",amount:"20",date:"20-5-2005"){
+  #   amount
+  # }
+# }

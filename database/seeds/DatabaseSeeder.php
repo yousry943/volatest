@@ -26,6 +26,20 @@ class DatabaseSeeder extends Seeder
         App\currency_account::insert(['name'=>'EGP']);
         App\currency_account::insert(['name'=>'SAR']);
 
+
+       App\deposit_bank::insert(['user_id'=>'1','id_user_bank_account'=>'1','amount'=>'200','date'=>'10-10-2010']);
+       App\deposit_bank::insert(['user_id'=>'1','id_user_bank_account'=>'1','amount'=>'200','date'=>'10-10-2010']);
+
+       App\deposit_bank::insert(['user_id'=>'1','id_user_bank_account'=>'2','amount'=>'200','date'=>'10-10-2010']);
+
+       App\transactions_request::insert(['user_id'=>'1','from_user_bank_account_id'=>'1','to_user_bank_account_id'=>'2','amount'=>'20','date'=>'10-10-2010']);
+       App\transactions_request::insert(['user_id'=>'1','from_user_bank_account_id'=>'1','to_user_bank_account_id'=>'2','amount'=>'20','date'=>'10-10-2010']);
+
+
+       App\withdrow_bank::insert(['user_id'=>'1','id_user_bank_account'=>'1','amount'=>'20','date'=>'10-10-2010']);
+       App\withdrow_bank::insert(['user_id'=>'1','id_user_bank_account'=>'1','amount'=>'10','date'=>'10-10-2010']);
+
+
         App\User::insert(['name' => 'ahmed','password' => bcrypt('123456'),'email' => 'ahmed@ahmed.com']);
 
 
